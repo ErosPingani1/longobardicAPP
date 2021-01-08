@@ -1,0 +1,7 @@
+{
+  "name": "longobardicAPP",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
