@@ -11,6 +11,14 @@ const routes: Routes = [
     redirectTo: 'home',
     pathMatch: 'full'
   },
+  {
+    path: 'mailbox',
+    loadChildren: () => import('./mailbox/mailbox.module').then( m => m.MailboxPageModule)
+  },
+  {
+    path: 'zorro',
+    loadChildren: () => import('./zorro/zorro.module').then( m => m.ZorroPageModule)
+  },
 ];
 
 @NgModule({
