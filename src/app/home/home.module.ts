@@ -5,7 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { HomePage } from './home.page';
 
 import { HomePageRoutingModule } from './home-routing.module';
-import { SelectionCardComponent } from 'src/components/selection-card/selection-card.component';
+import { SelectionCardComponent } from 'src/app/components/selection-card/selection-card.component';
 
 
 @NgModule({

@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">longobardicAPP</string>
+    <string name="title_activity_main">longobardicAPP</string>
+    <string name="package_name">com.erospingani1.longobardicapp</string>
+    <string name="custom_url_scheme">com.erospingani1.longobardicapp</string>
+</resources>

@@ -1,6 +1,6 @@
 import { Component, Injectable, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { SelectionCard } from 'src/models/selection-card';
+import { SelectionCard } from 'src/app/models/selection-card';
 
 /**
  * Selection card component used to select a functionality and open the relative detail page

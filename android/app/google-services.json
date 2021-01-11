@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "895516874028",
+    "project_id": "longobardicappnotifier",
+    "storage_bucket": "longobardicappnotifier.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:895516874028:android:3039405809df5582d24889",
+        "android_client_info": {
+          "package_name": "com.erospingani1.longobardicapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "895516874028-jri3ccr73bpotl8j5t9h79fcikoc9k7s.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCq-FHn5BuBi_aI_Bfc7bGnmcNgVKIXpxI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "895516874028-jri3ccr73bpotl8j5t9h79fcikoc9k7s.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
