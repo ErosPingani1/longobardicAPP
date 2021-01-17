@@ -69,7 +69,8 @@ export class NotificationService {
     PushNotifications.addListener(
       'pushNotificationReceived',
       async (notification: PushNotification) => {
-        console.log('Push received: ' + JSON.stringify(notification));
+        console.log('Push received: ', notification);
+        console.log('Push data: ', JSON.parse(notification.data.content));
       }
     );
 
