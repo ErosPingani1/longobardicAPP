@@ -40,19 +40,19 @@ export class AppComponent {
    */
   private checkStorage(availableCollections: number) {
     for (let i = 0; i < availableCollections; i++) {
-      const collectionKey: string = (i + 1).toString();
+      const collectionKey = (i + 1).toString();
       this.storageService.getCollection(collectionKey)
       .then((collection) => {
         if (collection != null) {
           console.log(`Collection ${i + 1} already available, added to cached collections`);
-          this.storageService.cachedCollections[i] = collection;
+          this.storageService.cachedCollections[i + 1] = collection;
         } else {
           this.storageService.setCollection(collectionKey, JSON.stringify([]))
           .then(() => {
             console.log(`Collection ${i + 1} created, hoorray!`);
             this.storageService.getCollection(collectionKey)
             .then((savedCollection) => {
-              this.storageService.cachedCollections[i] = savedCollection;
+              this.storageService.cachedCollections[i + 1] = savedCollection;
               console.log(`Collection ${i + 1} added to cached collections after creation`);
             });
           });

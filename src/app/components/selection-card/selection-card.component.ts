@@ -1,6 +1,5 @@
 import { Component, Injectable, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { SelectionCard } from 'src/app/models/selection-card';
 
 /**
  * Selection card component used to select a functionality and open the relative detail page
@@ -16,20 +15,17 @@ export class SelectionCardComponent implements OnInit {
   @Input() icon: string;
   @Input() title: string;
   @Input() linkedPage: string;
-
-  selectionCard: SelectionCard = new SelectionCard();
+  @Input() badge: boolean;
+  @Input() value: number;
 
   constructor(
     private router: Router
-  ) {
-  }
+  ) { }
 
-  ngOnInit() {
-    this.selectionCard = { icon: this.icon, title: this.title, linkedPage: this.linkedPage };
-  }
+  ngOnInit() { }
 
   cardClick() {
-    this.router.navigate([this.selectionCard.linkedPage]);
+    this.router.navigate([this.linkedPage]);
   }
 
 }

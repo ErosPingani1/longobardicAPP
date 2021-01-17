@@ -29,4 +29,9 @@
 .selection-cards-row {
   display: flex;
   justify-content: space-evenly;
+  margin-top: 15px;
+}
+
+app-selection-card {
+  display: -webkit-inline-box;
 }

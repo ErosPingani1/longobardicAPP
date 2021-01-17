@@ -8,7 +8,16 @@
 
 <ion-content [fullscreen]="true">
   <ion-row class="selection-cards-row">
-    <app-selection-card class="card" [icon]="'mail-unread-outline'" [title]="'Mailbox'" [linkedPage]="'/mailbox'"></app-selection-card>
-    <app-selection-card class="card" [title]="'Zorro'" [linkedPage]="'/zorro'"></app-selection-card>
+    <app-selection-card 
+      class="card" 
+      [icon]="'mail-unread-outline'" 
+      [title]="'Mailbox'" 
+      [linkedPage]="'/mailbox'" 
+      [badge]="true"
+      [value]="newMails"></app-selection-card>
+    <app-selection-card 
+      class="card" 
+      [title]="'Zorro'" 
+      [linkedPage]="'/zorro'"></app-selection-card>
   </ion-row>
 </ion-content>

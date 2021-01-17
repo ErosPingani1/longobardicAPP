@@ -7,6 +7,9 @@ import {
   Capacitor
 } from '@capacitor/core';
 import { Router } from '@angular/router';
+import { StorageService } from '../storage/storage.service';
+import { Mail } from 'src/app/models/mail';
+import { HomepageService } from '../homepage/homepage.service';
 
 const { PushNotifications } = Plugins;
 
@@ -15,7 +18,11 @@ const { PushNotifications } = Plugins;
 })
 export class NotificationService {
 
-  constructor(private router: Router) { }
+  constructor(
+    private router: Router,
+    private storageService: StorageService,
+    private homepageService: HomepageService
+  ) { }
 
   /**
    * Method called in app component to register push notifications behavior on app loading
@@ -71,6 +78,21 @@ export class NotificationService {
       async (notification: PushNotification) => {
         console.log('Push received: ', notification);
         console.log('Push data: ', JSON.parse(notification.data.content));
+        const pushData = JSON.parse(notification.data.content);
+        const notificationType = pushData.notificationType;
+        switch (notificationType) {
+          case 1: { // mailbox
+            const newMail = new Mail(pushData.arduinoInfo);
+            this.storageService.cachedCollections[notificationType.toString()].push(newMail);
+            console.log(`Updated mail collection in storage: `, this.storageService.cachedCollections[notificationType]);
+            this.storageService.setCollection(notificationType.toString(),
+              JSON.stringify(this.storageService.cachedCollections[pushData.notificationType]))
+              .then(() => {
+                console.log(`Mailbox collection updated, hoorray!`);
+                this.homepageService.checkNewMailsValue();
+              });
+          }
+        }
       }
     );
 
