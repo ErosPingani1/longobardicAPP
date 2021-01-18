@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, NgZone } from '@angular/core';
 import { HomepageService } from 'src/app/services/homepage/homepage.service';
 
 @Component({
@@ -8,12 +8,22 @@ import { HomepageService } from 'src/app/services/homepage/homepage.service';
 })
 export class HomePage {
 
-  protected newMails = 0;
+  protected newMails: number;
 
   constructor(
-    private homepageService: HomepageService
+    private homepageService: HomepageService,
+    private zone: NgZone
   ) {
     this.newMails = this.homepageService.checkNewMailsValue();
+    this.homepageService.newMailsChange.subscribe((mailsValue) => {
+      this.zone.run(() => { // NgZone allows Angular to detect the change
+        this.newMails = mailsValue;
+      });
+    });
+  }
+
+  ionViewWillLeave() {
+    this.homepageService.newMailsChange.unsubscribe();
   }
 
 }

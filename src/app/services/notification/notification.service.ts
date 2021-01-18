@@ -76,7 +76,6 @@ export class NotificationService {
     PushNotifications.addListener(
       'pushNotificationReceived',
       async (notification: PushNotification) => {
-        console.log('Push received: ', notification);
         console.log('Push data: ', JSON.parse(notification.data.content));
         const pushData = JSON.parse(notification.data.content);
         const notificationType = pushData.notificationType;
@@ -84,12 +83,10 @@ export class NotificationService {
           case 1: { // mailbox
             const newMail = new Mail(pushData.arduinoInfo);
             this.storageService.cachedCollections[notificationType.toString()].push(newMail);
-            console.log(`Updated mail collection in storage: `, this.storageService.cachedCollections[notificationType]);
             this.storageService.setCollection(notificationType.toString(),
               JSON.stringify(this.storageService.cachedCollections[pushData.notificationType]))
               .then(() => {
-                console.log(`Mailbox collection updated, hoorray!`);
-                this.homepageService.checkNewMailsValue();
+                this.homepageService.updateBadgeValue();
               });
           }
         }

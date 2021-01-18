@@ -5,6 +5,7 @@ import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { NotificationService } from 'src/app/services/notification/notification.service';
 import { StorageService } from './services/storage/storage.service';
+import { HomepageService } from './services/homepage/homepage.service';
 
 @Component({
   selector: 'app-root',
