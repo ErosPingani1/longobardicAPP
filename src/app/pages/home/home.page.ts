@@ -16,9 +16,10 @@ export class HomePage {
   ) {
     this.newMails = this.homepageService.checkNewMailsValue();
     this.homepageService.newMailsChange.subscribe((mailsValue) => {
-      this.zone.run(() => { // NgZone allows Angular to detect the change
+      this.zone.run(() => { // NgZone allows Angular to detect the change and show the new value on the html
         this.newMails = mailsValue;
       });
+      console.log('Updated NewMails value: ', this.newMails);
     });
   }
 

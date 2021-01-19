@@ -71,25 +71,14 @@ export class NotificationService {
     );
 
     /**
-     * Event called when the device receives a push notification
+     * Event called when the device receives a push notification on foregrounded app
      */
     PushNotifications.addListener(
       'pushNotificationReceived',
       async (notification: PushNotification) => {
+        console.log('Push received: ', notification);
         console.log('Push data: ', JSON.parse(notification.data.content));
-        const pushData = JSON.parse(notification.data.content);
-        const notificationType = pushData.notificationType;
-        switch (notificationType) {
-          case 1: { // mailbox
-            const newMail = new Mail(pushData.arduinoInfo);
-            this.storageService.cachedCollections[notificationType.toString()].push(newMail);
-            this.storageService.setCollection(notificationType.toString(),
-              JSON.stringify(this.storageService.cachedCollections[pushData.notificationType]))
-              .then(() => {
-                this.homepageService.updateBadgeValue();
-              });
-          }
-        }
+        this.checkNewNotificationAvailability(notification);
       }
     );
 
@@ -104,8 +93,32 @@ export class NotificationService {
         if (data.detailsId) {
           this.router.navigate(['/mailbox']); // Dopo lo slash inserire il tipo di notifica ricevuta
         }
+        this.checkNewNotificationAvailability(notification.notification);
       }
     );
+  }
+
+  /**
+   * Method that executes the check on a incoming notification and depending on the type
+   * adds the information in the right cached collection
+   * @param notification - PushNotification object (data received)
+   */
+  private checkNewNotificationAvailability(notification: PushNotification) {
+    const pushData = JSON.parse(notification.data.content);
+    const notificationType = pushData.notificationType;
+    switch (notificationType) {
+      case 1: { // mailbox
+        const newMail = new Mail(pushData.arduinoInfo);
+        this.storageService.cachedCollections[notificationType.toString()].push(newMail);
+        console.log(`Updated mail collection in storage: `, this.storageService.cachedCollections[notificationType]);
+        this.storageService.setCollection(notificationType.toString(),
+          JSON.stringify(this.storageService.cachedCollections[pushData.notificationType]))
+          .then(() => {
+            console.log(`Mailbox collection updated, hoorray!`);
+            this.homepageService.updateBadgeValue();
+          });
+      }
+    }
   }
 
 }
