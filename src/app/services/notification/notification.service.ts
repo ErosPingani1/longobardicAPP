@@ -10,6 +10,8 @@ import { Router } from '@angular/router';
 import { StorageService } from '../storage/storage.service';
 import { Mail } from 'src/app/models/mail';
 import { HomepageService } from '../homepage/homepage.service';
+import { ArduinoInfo } from 'src/app/models/arduino-info';
+import { formatDate } from '@angular/common';
 
 const { PushNotifications } = Plugins;
 
@@ -61,7 +63,7 @@ export class NotificationService {
     );
 
     /**
-     * Event on push notification registration
+     * Event on push notification functionality registration
      */
     PushNotifications.addListener(
       'registration',
@@ -76,8 +78,6 @@ export class NotificationService {
     PushNotifications.addListener(
       'pushNotificationReceived',
       async (notification: PushNotification) => {
-        console.log('Push received: ', notification);
-        console.log('Push data: ', JSON.parse(notification.data.content));
         this.checkNewNotificationAvailability(notification);
       }
     );
@@ -89,11 +89,12 @@ export class NotificationService {
       'pushNotificationActionPerformed',
       async (notification: PushNotificationActionPerformed) => {
         const data = notification.notification.data;
-        console.log('Action performed: ' + JSON.stringify(notification.notification));
         if (data.detailsId) {
           this.router.navigate(['/mailbox']); // Dopo lo slash inserire il tipo di notifica ricevuta
         }
-        this.checkNewNotificationAvailability(notification.notification);
+        setTimeout(() => { // Timeout set to be sure that when push is clicked on app closed the cache is already available
+          this.checkNewNotificationAvailability(notification.notification);
+        }, 500);
       }
     );
   }
@@ -110,15 +111,63 @@ export class NotificationService {
       case 1: { // mailbox
         const newMail = new Mail(pushData.arduinoInfo);
         this.storageService.cachedCollections[notificationType.toString()].push(newMail);
-        console.log(`Updated mail collection in storage: `, this.storageService.cachedCollections[notificationType]);
         this.storageService.setCollection(notificationType.toString(),
           JSON.stringify(this.storageService.cachedCollections[pushData.notificationType]))
           .then(() => {
-            console.log(`Mailbox collection updated, hoorray!`);
             this.homepageService.updateBadgeValue();
           });
       }
     }
+  }
+
+  /**
+   * These method is necessary to correctly manage the notifications received when the app is backgrounded.
+   * Thanks to PushNotifications.getDeliveredNotifications() it is possible to get the list of available
+   * notifications in system tray, but due to security reasons the passed data stored in content are not accessible.
+   * That's why it is required to create the correct type of notification manually, in order to pass it to checkNotificationAvailability()
+   */
+  private generateNotificationscontentForTypeAndCheck(availableNotifications: PushNotification[]) {
+    const mailboxTitle = 'De pusc notifichescio';
+    // const zorroTitle = '';
+    availableNotifications.forEach(
+      (n) => {
+        switch (n.title) {
+          case mailboxTitle: { // In case the notification has a mailbox title
+            n.data = {
+              content: JSON.stringify({
+                // Arduino info object created with current date and time and last battery read (100 if first)
+                arduinoInfo: new ArduinoInfo(
+                  formatDate(new Date(), 'dd-MM-yyyy', 'en-US'),
+                  new Date().toLocaleTimeString('it-IT', {hour12: false, hour: 'numeric', minute: 'numeric'}),
+                  this.storageService.cachedCollections['1'].length > 0
+                    ? this.storageService.cachedCollections['1'][this.storageService.cachedCollections['1'].length - 1].arduinoInfo.battery
+                    : '100'
+                ),
+                message: 'New mail registered',
+                notificationType: 1,
+                status: 'ok'
+              })
+            };
+            this.checkNewNotificationAvailability(n);
+          }
+        }
+      }
+    );
+    PushNotifications.removeAllDeliveredNotifications();
+  }
+
+  /**
+   * Method automatically called when app is resumed from background or opened
+   * App component is in fact subscribed to app status change
+   */
+  public checkNotificationsOnAppOpeningOrBackToForeground() {
+    PushNotifications.getDeliveredNotifications()
+    .then((pushList) => {
+      const availableNotifications = pushList.notifications;
+      if (availableNotifications.length > 0) {
+        this.generateNotificationscontentForTypeAndCheck(availableNotifications);
+      }
+    });
   }
 
 }

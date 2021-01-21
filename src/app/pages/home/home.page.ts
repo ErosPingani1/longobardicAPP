@@ -1,4 +1,4 @@
-import { Component, NgZone } from '@angular/core';
+import { Component, NgZone, OnDestroy } from '@angular/core';
 import { HomepageService } from 'src/app/services/homepage/homepage.service';
 
 @Component({
@@ -6,7 +6,7 @@ import { HomepageService } from 'src/app/services/homepage/homepage.service';
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss'],
 })
-export class HomePage {
+export class HomePage implements OnDestroy {
 
   protected newMails: number;
 
@@ -23,7 +23,7 @@ export class HomePage {
     });
   }
 
-  ionViewWillLeave() {
+  ngOnDestroy() {
     this.homepageService.newMailsChange.unsubscribe();
   }
 

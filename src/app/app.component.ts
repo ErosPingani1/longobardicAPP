@@ -21,6 +21,9 @@ export class AppComponent {
     private storageService: StorageService
   ) {
     this.initializeApp();
+    this.platform.resume.subscribe(async () => { // Notifications checked on app resume (back to foreground)
+      this.notificationService.checkNotificationsOnAppOpeningOrBackToForeground();
+    });
   }
 
   initializeApp() {
@@ -29,6 +32,7 @@ export class AppComponent {
       this.splashScreen.hide();
       this.notificationService.initPush();
       this.checkStorage(3);
+      this.notificationService.checkNotificationsOnAppOpeningOrBackToForeground(); // Notifications checked on app opening
     });
   }
 
