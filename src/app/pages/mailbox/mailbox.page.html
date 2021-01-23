@@ -1,9 +1,24 @@
-<ion-header>
+<ion-header translucent>
   <ion-toolbar>
     <ion-title>Mailbox</ion-title>
   </ion-toolbar>
+  <ion-toolbar>
+    <ion-segment (ionSelect)="segmentChanged($event)" value="{{ selectedSegment }}">
+      <ion-segment-button 
+        *ngFor="let segment of availableSegments"
+        value="{{ segment }}">
+        <ion-label>{{ segment }}</ion-label>
+      </ion-segment-button>
+    </ion-segment>
+  </ion-toolbar>
 </ion-header>
 
-<ion-content>
-
+<ion-content fullscreen>
+  <ion-list lines="none" class="mailbox-list" *ngIf="selectedSegment === 'Archive'">
+    <ng-container *ngIf="storageService.cachedCollections['1'].length > 0">
+      <app-mail-entry 
+        *ngFor="let m of storageService.cachedCollections['1']"
+        (click)="presentMailboxDetail()"></app-mail-entry>
+    </ng-container>
+  </ion-list>
 </ion-content>

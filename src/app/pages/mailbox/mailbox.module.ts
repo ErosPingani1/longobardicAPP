@@ -7,6 +7,8 @@ import { IonicModule } from '@ionic/angular';
 import { MailboxPageRoutingModule } from './mailbox-routing.module';
 
 import { MailboxPage } from './mailbox.page';
+import { MailsArchiveEntryComponent } from 'src/app/components/mails-archive-entry/mails-archive-entry.component';
+import { MailDetailModalComponent } from 'src/app/components/mail-detail-modal/mail-detail-modal.component';
 
 @NgModule({
   imports: [
@@ -15,6 +17,13 @@ import { MailboxPage } from './mailbox.page';
     IonicModule,
     MailboxPageRoutingModule
   ],
-  declarations: [MailboxPage]
+  declarations: [
+    MailboxPage,
+    MailsArchiveEntryComponent,
+    MailDetailModalComponent
+  ],
+  exports: [
+    MailDetailModalComponent
+  ]
 })
 export class MailboxPageModule {}

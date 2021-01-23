@@ -1,4 +1,4 @@
-<ion-badge *ngIf="badge" color="primary" mode="ios">{{ value }}</ion-badge>
+<ion-badge *ngIf="badge && value > 0" color="primary" mode="ios">{{ value }}</ion-badge>
 <ion-card class="selection-card" (click)="cardClick()">
   <ion-icon class="selection-card-icon" name="{{ icon }}"></ion-icon>
   <ion-card-header>

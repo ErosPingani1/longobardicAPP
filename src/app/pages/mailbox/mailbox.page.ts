@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Plugins } from '@capacitor/core';
+import { IonRouterOutlet, ModalController } from '@ionic/angular';
+import { MailDetailModalComponent } from 'src/app/components/mail-detail-modal/mail-detail-modal.component';
+import { StorageService } from 'src/app/services/storage/storage.service';
 
 const { PushNotifications } = Plugins;
 
@@ -10,7 +13,14 @@ const { PushNotifications } = Plugins;
 })
 export class MailboxPage implements OnInit {
 
-  constructor() { }
+  protected availableSegments = ['Mailbox', 'Archive'];
+  protected selectedSegment = 'Mailbox';
+
+  constructor(
+    protected storageService: StorageService,
+    private modalController: ModalController,
+    private routerOutlet: IonRouterOutlet
+  ) { }
 
   ngOnInit() {
   }
@@ -22,8 +32,26 @@ export class MailboxPage implements OnInit {
   /**
    * Method that clears notifications history and removes app badge
    */
-  resetBadgeCount() {
+  private resetBadgeCount() {
     PushNotifications.removeAllDeliveredNotifications();
+  }
+
+  protected segmentChanged(event: any): void {
+    this.selectedSegment = event.detail.value;
+  }
+
+  protected async presentMailboxDetail(): Promise<void> {
+    const modal = await this.modalController.create({
+      component: MailDetailModalComponent,
+      cssClass: 'mail-detail-modal',
+      mode: 'ios',
+      animated: true,
+      presentingElement: this.routerOutlet.nativeEl,
+      swipeToClose: true,
+      keyboardClose: true,
+      backdropDismiss: true
+    });
+    await modal.present();
   }
 
 }
