@@ -1,7 +1,33 @@
 .mailbox-entry {
-    border: 1px solid lightgray;
+    //border: 1px solid lightgray;
+    box-shadow: 5px 5px 10px #e0e0e0, -20px 0px 10px #ffffff;
     border-left: 4px solid #3880ff;
     border-radius: 5px;
     width: 95%;
     z-index: 1;
+}
+
+ion-icon {
+    width: 3.5vw;
+}
+
+.icon-col-location {
+    padding-left: 0;
+}
+
+.icon-col-date {
+    padding-left: 0;
+    padding-right: 0;
+    max-width: 18.5vw;
+}
+
+.icon-container {
+    display: flex;
+    align-items: center;
+
+    ion-text {
+        font-size: 2.5vw;
+        font-weight: 600;
+        padding-left: 3px;
+    }
 }

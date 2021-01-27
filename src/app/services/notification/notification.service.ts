@@ -137,11 +137,14 @@ export class NotificationService {
               content: JSON.stringify({
                 // Arduino info object created with current date and time and last battery read (100 if first)
                 arduinoInfo: new ArduinoInfo(
-                  formatDate(new Date(), 'dd-MM-yyyy', 'en-US'),
+                  formatDate(new Date(), 'dd-MM-yy', 'en-US'),
                   new Date().toLocaleTimeString('it-IT', {hour12: false, hour: 'numeric', minute: 'numeric'}),
                   this.storageService.cachedCollections['1'].length > 0
                     ? this.storageService.cachedCollections['1'][this.storageService.cachedCollections['1'].length - 1].arduinoInfo.battery
-                    : '100'
+                    : '100',
+                    this.storageService.cachedCollections['1'].length > 0
+                    ? this.storageService.cachedCollections['1'][this.storageService.cachedCollections['1'].length - 1].arduinoInfo.location
+                    : 'Fara Gera d\'Adda',
                 ),
                 message: 'New mail registered',
                 notificationType: 1,

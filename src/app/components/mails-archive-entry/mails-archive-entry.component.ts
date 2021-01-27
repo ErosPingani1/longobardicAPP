@@ -1,4 +1,5 @@
-import { Component, Injectable, OnInit } from '@angular/core';
+import { Component, Injectable, Input, OnInit } from '@angular/core';
+import { Mail } from 'src/app/models/mail';
 
 @Injectable()
 @Component({
@@ -8,8 +9,12 @@ import { Component, Injectable, OnInit } from '@angular/core';
 })
 export class MailsArchiveEntryComponent implements OnInit {
 
+  @Input() mail: Mail;
+
   constructor() { }
 
-  ngOnInit() {}
+  ngOnInit() {
+    console.log(this.mail);
+  }
 
 }

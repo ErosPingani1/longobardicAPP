@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Plugins } from '@capacitor/core';
 import { IonRouterOutlet, ModalController } from '@ionic/angular';
 import { MailDetailModalComponent } from 'src/app/components/mail-detail-modal/mail-detail-modal.component';
+import { Mail } from 'src/app/models/mail';
 import { StorageService } from 'src/app/services/storage/storage.service';
 
 const { PushNotifications } = Plugins;
@@ -40,7 +41,7 @@ export class MailboxPage implements OnInit {
     this.selectedSegment = event.detail.value;
   }
 
-  protected async presentMailboxDetail(): Promise<void> {
+  protected async presentMailboxDetail(mail: Mail): Promise<void> {
     const modal = await this.modalController.create({
       component: MailDetailModalComponent,
       cssClass: 'mail-detail-modal',

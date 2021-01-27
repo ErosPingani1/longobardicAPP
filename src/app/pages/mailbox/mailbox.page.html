@@ -18,7 +18,8 @@
     <ng-container *ngIf="storageService.cachedCollections['1'].length > 0">
       <app-mail-entry 
         *ngFor="let m of storageService.cachedCollections['1']"
-        (click)="presentMailboxDetail()"></app-mail-entry>
+        [mail]="m"
+        (click)="presentMailboxDetail(m)"></app-mail-entry>
     </ng-container>
   </ion-list>
 </ion-content>

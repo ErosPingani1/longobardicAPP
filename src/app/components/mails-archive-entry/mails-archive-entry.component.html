@@ -1,3 +1,27 @@
 <ion-item class="mailbox-entry">
-  <ion-label>This is a new mailbox notification</ion-label>
+  <ion-grid>
+    <ion-row>
+      <ion-label>This is a new mailbox notification</ion-label>
+    </ion-row>
+    <ion-row>
+      <ion-col size="4" class="icon-col-location">
+        <div class="icon-container">
+          <ion-icon name="location"></ion-icon>
+          <ion-text>{{ mail.arduinoInfo.location }}</ion-text>
+        </div>
+      </ion-col>
+      <ion-col class="icon-col-date">
+        <div class="icon-container">
+          <ion-icon name="calendar"></ion-icon>
+          <ion-text>{{ mail.arduinoInfo.date }}</ion-text>
+        </div>
+      </ion-col>
+      <ion-col size="2" class="icon-col">
+        <div class="icon-container">
+          <ion-icon name="time"></ion-icon>
+          <ion-text>{{ mail.arduinoInfo.time }}</ion-text>
+        </div>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 </ion-item>
