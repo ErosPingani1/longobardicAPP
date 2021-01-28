@@ -12,6 +12,7 @@ import { Mail } from 'src/app/models/mail';
 import { HomepageService } from '../homepage/homepage.service';
 import { ArduinoInfo } from 'src/app/models/arduino-info';
 import { formatDate } from '@angular/common';
+import { ToastController } from '@ionic/angular';
 
 const { PushNotifications } = Plugins;
 
@@ -23,7 +24,8 @@ export class NotificationService {
   constructor(
     private router: Router,
     private storageService: StorageService,
-    private homepageService: HomepageService
+    private homepageService: HomepageService,
+    private toastController: ToastController
   ) { }
 
   /**
@@ -104,7 +106,7 @@ export class NotificationService {
    * adds the information in the right cached collection
    * @param notification - PushNotification object (data received)
    */
-  private checkNewNotificationAvailability(notification: PushNotification) {
+  private async checkNewNotificationAvailability(notification: PushNotification) {
     const pushData = JSON.parse(notification.data.content);
     const notificationType = pushData.notificationType;
     switch (notificationType) {
@@ -116,6 +118,11 @@ export class NotificationService {
           .then(() => {
             this.homepageService.updateBadgeValue();
           });
+        const toast = await this.toastController.create({
+          message: 'New mail received',
+          duration: 2000
+        });
+        toast.present();
       }
     }
   }
