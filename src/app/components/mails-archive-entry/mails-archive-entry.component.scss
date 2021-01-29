@@ -1,6 +1,5 @@
 .mailbox-entry {
     box-shadow: 5px 5px 10px #e0e0e0, -20px 0px 10px #ffffff;
-    border-left: 4px solid #3880ff;
     border-radius: 5px;
     width: 95%;
     z-index: 1;
@@ -38,4 +37,8 @@
             padding-left: 3px;
         }
     }
+}
+
+.new-entry {
+    border-left: 4px solid #3880ff;
 }

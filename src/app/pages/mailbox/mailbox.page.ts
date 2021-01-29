@@ -45,6 +45,9 @@ export class MailboxPage implements OnInit {
     const modal = await this.modalController.create({
       component: MailDetailModalComponent,
       cssClass: 'mail-detail-modal',
+      componentProps: {
+        selectedMail: mail
+      },
       mode: 'ios',
       animated: true,
       presentingElement: this.routerOutlet.nativeEl,

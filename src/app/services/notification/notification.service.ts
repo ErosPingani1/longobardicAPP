@@ -111,8 +111,8 @@ export class NotificationService {
     const notificationType = pushData.notificationType;
     switch (notificationType) {
       case 1: { // mailbox
-        const newMail = new Mail(pushData.arduinoInfo);
-        this.storageService.cachedCollections[notificationType.toString()].push(newMail);
+        const newMail = new Mail(pushData.arduinoInfo, this.storageService.cachedCollections[notificationType].length + 1);
+        this.storageService.cachedCollections[notificationType.toString()].unshift(newMail);
         this.storageService.setCollection(notificationType.toString(),
           JSON.stringify(this.storageService.cachedCollections[pushData.notificationType]))
           .then(() => {

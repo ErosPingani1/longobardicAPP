@@ -13,8 +13,6 @@ export class MailsArchiveEntryComponent implements OnInit {
 
   constructor() { }
 
-  ngOnInit() {
-    console.log(this.mail);
-  }
+  ngOnInit() { }
 
 }
