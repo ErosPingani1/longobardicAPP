@@ -3,8 +3,9 @@
     <img class="logo" src="../../../assets/img/open-email.svg" alt="letter-logo"/>
   </div>
   <ion-list>
-    <ion-item *ngFor="let detail of selectedMail.arduinoInfo | keyvalue">
-      <ion-label>{{ detail.value }}</ion-label>
+    <ion-item class="mail-detail" *ngFor="let detail of selectedMail.arduinoInfo | keyvalue">
+      <ion-label class="detail-key">{{ detail.key }}</ion-label>
+      <ion-label class="detail-value">{{ detail.value }}<span *ngIf="detail.key == 'battery'">%</span></ion-label>
     </ion-item>
   </ion-list>
 </div>

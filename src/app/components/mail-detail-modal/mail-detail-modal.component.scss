@@ -9,4 +9,24 @@
             width: 80px;
         }
     }
+
+    .mail-detail {
+        padding-right: 10vw;
+        padding-left: 10vw;
+        --inner-padding-end: 0;
+        --padding-start: 0;
+        font-size: 3vw;
+
+        .detail-key {
+            text-transform: capitalize;
+        }
+
+        .detail-value {
+            text-align: end;
+        }
+    }
+
+    ion-item:last-child {
+        --inner-border-width: 0;
+    }
 }
