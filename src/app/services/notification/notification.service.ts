@@ -149,9 +149,12 @@ export class NotificationService {
                   this.storageService.cachedCollections['1'].length > 0
                     ? this.storageService.cachedCollections['1'][this.storageService.cachedCollections['1'].length - 1].arduinoInfo.battery
                     : '100',
-                    this.storageService.cachedCollections['1'].length > 0
-                    ? this.storageService.cachedCollections['1'][this.storageService.cachedCollections['1'].length - 1].arduinoInfo.location
-                    : 'Fara Gera d\'Adda',
+                  this.storageService.cachedCollections['1'].length > 0
+                  ? this.storageService.cachedCollections['1'][this.storageService.cachedCollections['1'].length - 1].arduinoInfo.location
+                  : 'Fara Gera d\'Adda',
+                  this.storageService.cachedCollections['1'].length > 0
+                  ? this.storageService.cachedCollections['1'][this.storageService.cachedCollections['1'].length - 1].arduinoInfo.device
+                  : 'NodeMCU esp8266',
                 ),
                 message: 'New mail registered',
                 notificationType: 1,

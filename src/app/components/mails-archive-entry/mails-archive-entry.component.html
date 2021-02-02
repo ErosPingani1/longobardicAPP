@@ -1,4 +1,4 @@
-<ion-item class="mailbox-entry" [ngClass]="mail.new === true ? 'new-entry' : ''">
+<ion-item class="mailbox-entry" [ngClass]="{'new-entry': mail.new}">
   <ion-grid>
     <ion-row>
       <ion-label class="title">New Mail</ion-label>

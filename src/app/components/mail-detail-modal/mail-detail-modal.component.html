@@ -1,3 +1,10 @@
-<p>
-  mail-detail-modal works!
-</p>
+<div class="modal-container">
+  <div class="logo-container">
+    <img class="logo" src="../../../assets/img/open-email.svg" alt="letter-logo"/>
+  </div>
+  <ion-list>
+    <ion-item *ngFor="let detail of selectedMail.arduinoInfo | keyvalue">
+      <ion-label>{{ detail.value }}</ion-label>
+    </ion-item>
+  </ion-list>
+</div>
