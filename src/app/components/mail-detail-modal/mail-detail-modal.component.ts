@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Mail } from 'src/app/models/mail';
 import { HomepageService } from 'src/app/services/homepage/homepage.service';
+import { MailboxService } from 'src/app/services/mailbox/mailbox.service';
 import { StorageService } from 'src/app/services/storage/storage.service';
 
 @Component({
@@ -12,9 +13,12 @@ export class MailDetailModalComponent implements OnInit {
 
   @Input() selectedMail: Mail;
 
+  protected sortedMail = [];
+
   constructor(
     private storageService: StorageService,
-    private homepageService: HomepageService
+    private homepageService: HomepageService,
+    private mailboxService: MailboxService
   ) { }
 
   ngOnInit() {
@@ -25,6 +29,7 @@ export class MailDetailModalComponent implements OnInit {
       }
     );
     console.log(this.selectedMail);
+    this.sortedMail = this.mailboxService.sortMailDetailContent(this.selectedMail);
   }
 
 }
