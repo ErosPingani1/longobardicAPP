@@ -6,6 +6,7 @@ import { HomePage } from './home.page';
 
 import { HomePageRoutingModule } from './home-routing.module';
 import { SelectionCardComponent } from 'src/app/components/selection-card/selection-card.component';
+import { HeaderToolbarComponent } from 'src/app/components/header-toolbar/header-toolbar.component';
 
 
 @NgModule({
@@ -15,6 +16,10 @@ import { SelectionCardComponent } from 'src/app/components/selection-card/select
     IonicModule,
     HomePageRoutingModule,
   ],
-  declarations: [HomePage, SelectionCardComponent]
+  declarations: [
+    HomePage,
+    SelectionCardComponent,
+    HeaderToolbarComponent
+  ]
 })
 export class HomePageModule {}

@@ -1,3 +1,27 @@
+@import url('https://fonts.googleapis.com/css2?family=Staatliches&display=swap');
+
+ion-header {
+    .toolbar {
+        --background: #1d4671;
+        color: whitesmoke;
+        font-family: 'Staatliches', cursive; 
+    }
+
+    .title {
+        margin-top: 20px;
+        letter-spacing: 2px;
+    }
+
+    .segment-button {
+        color: whitesmoke;
+        --indicator-color: whitesmoke;
+    }
+
+    .segment-button.unchecked {
+        opacity: 0.5;
+    }
+}
+
 ion-content {
 
     .mailbox-list {

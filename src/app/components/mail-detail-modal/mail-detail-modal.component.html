@@ -1,8 +1,9 @@
 <div class="modal-container">
+  <img class="remove" src="../../../assets/img/remove.svg" alt="remove"/>
   <div class="logo-container">
     <img class="logo" src="../../../assets/img/open-email.svg" alt="letter-logo"/>
   </div>
-  <ion-list>
+  <ion-list class="details-list">
     <ion-item class="mail-detail" *ngFor="let detail of sortedMail">
       <ion-label class="detail-key">{{ detail.key }}</ion-label>
       <ion-label class="detail-value">{{ detail.value }}<span *ngIf="detail.key == 'battery'">%</span></ion-label>

@@ -49,11 +49,8 @@ export class MailboxPage implements OnInit {
         selectedMail: mail
       },
       mode: 'ios',
-      animated: true,
       presentingElement: this.routerOutlet.nativeEl,
-      swipeToClose: true,
-      keyboardClose: true,
-      backdropDismiss: true
+      swipeToClose: true
     });
     await modal.present();
   }

@@ -28,7 +28,6 @@ export class MailDetailModalComponent implements OnInit {
         this.homepageService.updateBadgeValue();
       }
     );
-    console.log(this.selectedMail);
     this.sortedMail = this.mailboxService.sortMailDetailContent(this.selectedMail);
   }
 
