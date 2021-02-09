@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Plugins } from '@capacitor/core';
-import { IonRouterOutlet, ModalController } from '@ionic/angular';
+import { IonRouterOutlet, IonSlides, ModalController } from '@ionic/angular';
 import { MailDetailModalComponent } from 'src/app/components/mail-detail-modal/mail-detail-modal.component';
 import { Mail } from 'src/app/models/mail';
 import { StorageService } from 'src/app/services/storage/storage.service';
@@ -13,6 +13,8 @@ const { PushNotifications } = Plugins;
   styleUrls: ['./mailbox.page.scss'],
 })
 export class MailboxPage implements OnInit {
+
+  @ViewChild('slides', { static: true }) slider: IonSlides;
 
   protected availableSegments = ['Mailbox', 'Archive'];
   protected selectedSegment = 'Mailbox';
@@ -37,8 +39,14 @@ export class MailboxPage implements OnInit {
     PushNotifications.removeAllDeliveredNotifications();
   }
 
-  protected segmentChanged(event: any): void {
+  protected async segmentChanged(event: any): Promise<void> {
     this.selectedSegment = event.detail.value;
+    this.slider.slideTo(this.availableSegments.indexOf(this.selectedSegment));
+  }
+
+  protected async slideChanged(): Promise<void> {
+    const segment = await this.slider.getActiveIndex();
+    this.selectedSegment = this.availableSegments[segment];
   }
 
   protected async presentMailboxDetail(mail: Mail): Promise<void> {

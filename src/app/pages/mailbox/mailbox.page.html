@@ -16,15 +16,21 @@
 </ion-header>
 
 <ion-content fullscreen>
-  <ion-card class="mailbox-card" *ngIf="selectedSegment === 'Mailbox'">
+  <ion-slides #slides (ionSlideDidChange)="slideChanged()" scrollbar="false">
+    <ion-slide>
+      <ion-card class="mailbox-card" *ngIf="selectedSegment === 'Mailbox'">
     
-  </ion-card>
-  <ion-list lines="none" class="mailbox-list" *ngIf="selectedSegment === 'Archive'">
-    <ng-container *ngIf="storageService.cachedCollections['1'].length > 0">
-      <app-mail-entry 
-        *ngFor="let m of storageService.cachedCollections['1']"
-        [mail]="m"
-        (click)="presentMailboxDetail(m)"></app-mail-entry>
-    </ng-container>
-  </ion-list>
+      </ion-card>
+    </ion-slide>
+    <ion-slide>
+      <ion-list lines="none" class="mailbox-list" *ngIf="selectedSegment === 'Archive'">
+        <ng-container *ngIf="storageService.cachedCollections['1'].length > 0">
+          <app-mail-entry 
+            *ngFor="let m of storageService.cachedCollections['1']"
+            [mail]="m"
+            (click)="presentMailboxDetail(m)"></app-mail-entry>
+        </ng-container>
+      </ion-list>
+    </ion-slide>
+  </ion-slides>
 </ion-content>

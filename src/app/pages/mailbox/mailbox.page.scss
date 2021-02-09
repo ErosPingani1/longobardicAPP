@@ -24,14 +24,21 @@ ion-header {
 
 ion-content {
 
-    .mailbox-list {
-        margin-top: 5px;
-    }
+    ion-slides {
+        width: 100%;
+        height: 100%;
 
-    app-mail-entry {
-        display: flex;
-        justify-content: center;
-        margin-bottom: 3vw;
+        .mailbox-list {
+            width: 100%;
+            height: 100%;
+            margin-top: 5px;
+        }
+    
+        app-mail-entry {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 3vw;
+        }
     }
 
 }
