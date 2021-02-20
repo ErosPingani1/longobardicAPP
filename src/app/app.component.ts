@@ -5,6 +5,7 @@ import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { NotificationService } from 'src/app/services/notification/notification.service';
 import { StorageService } from './services/storage/storage.service';
+import { MailboxService } from './services/mailbox/mailbox.service';
 
 @Component({
   selector: 'app-root',
@@ -18,7 +19,8 @@ export class AppComponent {
     private splashScreen: SplashScreen,
     private statusBar: StatusBar,
     private notificationService: NotificationService,
-    private storageService: StorageService
+    private storageService: StorageService,
+    private mailboxService: MailboxService
   ) {
     this.initializeApp();
     this.platform.resume.subscribe(async () => { // Notifications checked on app resume (back to foreground)
@@ -33,6 +35,7 @@ export class AppComponent {
       this.notificationService.initPush();
       this.checkStorage(3);
       this.notificationService.checkNotificationsOnAppOpeningOrBackToForeground(); // Notifications checked on app opening
+      this.mailboxService.setSessionArduinoInfo();
     });
   }
 

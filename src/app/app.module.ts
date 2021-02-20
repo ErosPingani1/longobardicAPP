@@ -11,6 +11,7 @@ import { AppRoutingModule } from './app-routing.module';
 
 import { Device } from '@ionic-native/device/ngx';
 import { Push } from '@ionic-native/push/ngx';
+import { MailboxRepository } from './repos/mailbox.repository';
 
 
 @NgModule({
@@ -22,6 +23,7 @@ import { Push } from '@ionic-native/push/ngx';
     SplashScreen,
     Device,
     Push,
+    MailboxRepository,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
   bootstrap: [AppComponent]

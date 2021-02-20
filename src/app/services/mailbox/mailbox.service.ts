@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { Mail } from 'src/app/models/mail';
 import { StorageService } from '../storage/storage.service';
 import { formatDate } from '@angular/common';
+import { ArduinoInfo } from 'src/app/models/arduino-info';
+import { MailboxRepository } from 'src/app/repos/mailbox.repository';
 
 @Injectable({
   providedIn: 'root'
@@ -9,10 +11,13 @@ import { formatDate } from '@angular/common';
 export class MailboxService {
 
   constructor(
-    private storageService: StorageService
+    private storageService: StorageService,
+    private mailboxRepository: MailboxRepository
   ) { }
 
   private mailboxCollectionID = '1';
+
+  private sessionArduinoInfo: ArduinoInfo;
 
   /**
    * Get the number of available new mails
@@ -20,6 +25,19 @@ export class MailboxService {
   public getNewNotificationsNumber(): number {
     const mailCollection = this.storageService.cachedCollections[this.mailboxCollectionID];
     return mailCollection.length > 0 ? mailCollection.filter(m => m.new === true).length : 0 ;
+  }
+
+  public setSessionArduinoInfo(): void {
+    // Chiamata al repository che chiama il backend sul raspberry
+    this.mailboxRepository.getDeviceStatus().subscribe(
+      (resp) => {
+        console.log('This is getStatus response: ', resp);
+      }
+    );
+  }
+
+  public getSessionArduinoInfo(): ArduinoInfo {
+    return this.sessionArduinoInfo;
   }
 
   /**
