@@ -39,11 +39,18 @@ export class MailboxPage implements OnInit {
     PushNotifications.removeAllDeliveredNotifications();
   }
 
+  /**
+   * Method that sets the new selected segment in toolbar and slides to it
+   * @param event - event emitted on segment select
+   */
   protected async segmentChanged(event: any): Promise<void> {
     this.selectedSegment = event.detail.value;
     this.slider.slideTo(this.availableSegments.indexOf(this.selectedSegment));
   }
 
+  /**
+   * Slide event management method that sets a new segment on page slide
+   */
   protected async slideChanged(): Promise<void> {
     const segment = await this.slider.getActiveIndex();
     this.selectedSegment = this.availableSegments[segment];
