@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Plugins } from '@capacitor/core';
-import { Observable, of } from 'rxjs';
+import { GetStatusResponse } from '../models/get-status-response';
+import { formatDate } from '@angular/common';
+import 'sha1';
 import '@capacitor-community/http';
 
 @Injectable()
@@ -9,18 +11,26 @@ export class MailboxRepository {
 
     constructor() {}
 
-    public getDeviceStatus(): Observable<any> {
+    public async getDeviceStatus(): Promise<GetStatusResponse> {
+        const KEY = '196B5815CDE73CAE5CD7018359B851BBA754F80BB36FB7D50C1650F012496F70';
+        const params = [
+            formatDate(new Date(), 'dd-MM-yy', 'en-US'),
+            new Date().toLocaleTimeString('it-IT', {hour12: false, hour: 'numeric', minute: 'numeric'}),
+            ''
+        ];
+        const sha1 = require('sha1');
         const { Http } = Plugins;
-        return of(Http.request({
+        const response =  await Http.request({
             method: 'GET',
             url: 'http://mansardadipatate.controlliamo.com:9292/getStatus',
             params: {
-                date: '21-10-96',
-                time: '12:42',
-                battery: '25',
-                hashkey: '992C1F951500665688AF264231D063A83B5B2C51'
+                date: params[0],
+                time: params[1],
+                battery: params[2],
+                hashkey: sha1(KEY + params[0] + params[1] + params[2])
             }
-        }));
+        });
+        return response.data;
     }
 
 }

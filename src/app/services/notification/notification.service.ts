@@ -120,7 +120,7 @@ export class NotificationService {
           });
         const toast = await this.toastController.create({
           message: 'New mail received',
-          duration: 2000
+          duration: 2500
         });
         toast.present();
       }
@@ -134,7 +134,7 @@ export class NotificationService {
    * That's why it is required to create the correct type of notification manually, in order to pass it to checkNotificationAvailability()
    */
   private generateNotificationscontentForTypeAndCheck(availableNotifications: PushNotification[]) {
-    const mailboxTitle = 'De pusc notifichescio';
+    const mailboxTitle = 'New mail';
     // const zorroTitle = '';
     availableNotifications.forEach(
       (n) => {

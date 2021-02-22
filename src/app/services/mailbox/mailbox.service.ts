@@ -4,6 +4,7 @@ import { StorageService } from '../storage/storage.service';
 import { formatDate } from '@angular/common';
 import { ArduinoInfo } from 'src/app/models/arduino-info';
 import { MailboxRepository } from 'src/app/repos/mailbox.repository';
+import { ToastController } from '@ionic/angular';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +13,8 @@ export class MailboxService {
 
   constructor(
     private storageService: StorageService,
-    private mailboxRepository: MailboxRepository
+    private mailboxRepository: MailboxRepository,
+    private toastController: ToastController
   ) { }
 
   private mailboxCollectionID = '1';
@@ -27,13 +29,35 @@ export class MailboxService {
     return mailCollection.length > 0 ? mailCollection.filter(m => m.new === true).length : 0 ;
   }
 
+  /**
+   * Method that handles the toast error when the sessionArduinoInfo has to be set
+   */
+  public async showSetSessionErrorToast(): Promise<void> {
+    const toast = await this.toastController.create({
+      message: 'There was an error getting device info, please try again',
+      duration: 2500
+    });
+    toast.present();
+  }
+
+  /**
+   * Method that sets a sessionArduinoInfo in order to get the data on app opening and store it in session storage
+   */
   public setSessionArduinoInfo(): void {
-    // Chiamata al repository che chiama il backend sul raspberry
-    this.mailboxRepository.getDeviceStatus().subscribe(
-      (resp) => {
-        console.log('This is getStatus response: ', resp);
-      }
-    );
+    this.mailboxRepository.getDeviceStatus()
+      .then(
+        async (resp) => {
+          if (resp.status === 'ok') {
+            this.sessionArduinoInfo = resp.arduinoInfo;
+          } else {
+            this.showSetSessionErrorToast();
+          }
+        }
+      ).catch(
+        () => {
+          this.showSetSessionErrorToast();
+        }
+      );
   }
 
   public getSessionArduinoInfo(): ArduinoInfo {

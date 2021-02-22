@@ -32,6 +32,7 @@
     "phonegap-plugin-multidex": "^1.0.0",
     "phonegap-plugin-push": "^2.3.0",
     "rxjs": "~6.5.5",
+    "sha1": "^1.1.1",
     "tslib": "^2.0.0",
     "zone.js": "~0.10.3"
   },
@@ -46,6 +47,7 @@
     "@types/jasmine": "~3.5.0",
     "@types/jasminewd2": "~2.0.3",
     "@types/node": "^12.11.1",
+    "@types/sha1": "^1.1.2",
     "codelyzer": "^6.0.0",
     "jasmine-core": "~3.5.0",
     "jasmine-spec-reporter": "~5.0.0",
