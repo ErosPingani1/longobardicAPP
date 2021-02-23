@@ -2,7 +2,9 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { Plugins } from '@capacitor/core';
 import { IonRouterOutlet, IonSlides, ModalController } from '@ionic/angular';
 import { MailDetailModalComponent } from 'src/app/components/mail-detail-modal/mail-detail-modal.component';
+import { ArduinoInfo } from 'src/app/models/arduino-info';
 import { Mail } from 'src/app/models/mail';
+import { MailboxService } from 'src/app/services/mailbox/mailbox.service';
 import { StorageService } from 'src/app/services/storage/storage.service';
 
 const { PushNotifications } = Plugins;
@@ -18,14 +20,17 @@ export class MailboxPage implements OnInit {
 
   protected availableSegments = ['Mailbox', 'Archive'];
   protected selectedSegment = 'Mailbox';
+  protected arduinoInfo: ArduinoInfo;
 
   constructor(
     protected storageService: StorageService,
     private modalController: ModalController,
-    private routerOutlet: IonRouterOutlet
+    private routerOutlet: IonRouterOutlet,
+    private mailboxService: MailboxService
   ) { }
 
   ngOnInit() {
+    this.arduinoInfo = this.mailboxService.getSessionArduinoInfo();
   }
 
   ionViewDidEnter() {

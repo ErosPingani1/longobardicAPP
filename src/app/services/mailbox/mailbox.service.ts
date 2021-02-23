@@ -30,7 +30,7 @@ export class MailboxService {
   }
 
   /**
-   * Method that handles the toast error when the sessionArduinoInfo has to be set
+   * Method that handles the toast error whenever the setSessionArduinoInfo call encounters a problem
    */
   public async showSetSessionErrorToast(): Promise<void> {
     const toast = await this.toastController.create({

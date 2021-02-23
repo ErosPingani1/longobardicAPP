@@ -2,8 +2,8 @@ import { Injectable } from '@angular/core';
 import { Plugins } from '@capacitor/core';
 import { GetStatusResponse } from '../models/get-status-response';
 import { formatDate } from '@angular/common';
-import 'sha1';
 import '@capacitor-community/http';
+import 'sha1';
 
 @Injectable()
 
