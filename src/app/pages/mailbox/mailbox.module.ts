@@ -9,6 +9,7 @@ import { MailboxPageRoutingModule } from './mailbox-routing.module';
 import { MailboxPage } from './mailbox.page';
 import { MailsArchiveEntryComponent } from 'src/app/components/mails-archive-entry/mails-archive-entry.component';
 import { MailDetailModalComponent } from 'src/app/components/mail-detail-modal/mail-detail-modal.component';
+import { MailboxDetailComponent } from 'src/app/components/mailbox-detail/mailbox-detail.component';
 
 @NgModule({
   imports: [
@@ -20,7 +21,8 @@ import { MailDetailModalComponent } from 'src/app/components/mail-detail-modal/m
   declarations: [
     MailboxPage,
     MailsArchiveEntryComponent,
-    MailDetailModalComponent
+    MailDetailModalComponent,
+    MailboxDetailComponent
   ],
   exports: [
     MailDetailModalComponent

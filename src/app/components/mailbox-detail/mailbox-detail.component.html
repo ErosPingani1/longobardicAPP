@@ -1,3 +1,22 @@
-<p>
-  mailbox-detail works!
-</p>
+<div class="mailbox-detail-container">
+  <div class="detail detail-hardware">
+    <ion-icon name="hardware-chip"></ion-icon>
+    <span class="detail-text">{{ mailboxDetail.device }}</span>
+  </div>
+  <div class="detail detail-location">
+    <ion-icon name="location"></ion-icon>
+    <span class="detail-text">{{ mailboxDetail.location }}</span>
+  </div>
+  <div class="detail detail-battery">
+    <ng-container *ngIf="battery > 75">
+      <ion-icon name="battery-full"></ion-icon>
+    </ng-container>
+    <ng-container *ngIf="battery > 25">
+      <ion-icon name="battery-half"></ion-icon>
+    </ng-container>
+    <ng-container *ngIf="battery > 0">
+      <ion-icon name="battery-dead"></ion-icon>
+    </ng-container>
+    <span class="detail-text">{{ mailboxDetail.battery }}%</span>
+  </div>
+</div>

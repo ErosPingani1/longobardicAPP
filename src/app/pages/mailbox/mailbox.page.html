@@ -18,15 +18,15 @@
 <ion-content fullscreen>
   <ion-slides #slides (ionSlideDidChange)="slideChanged()" scrollbar="false">
     <ion-slide class="mailbox-info">
-      <div class="mailbox-image-container">
-        <img class="mailbox-image" src="../../../assets/img/mailbox.png" alt="mailbox"/>
-      </div>
-      <div class="mailbox-details-container">
-        <div class="detail-1">
-          <ion-icon name="hardware-chip"></ion-icon>
-          <span>{{ arduinoInfo.device }}</span>
+      <section>
+        <div class="mailbox-image-container">
+          <img class="mailbox-image" src="../../../assets/img/mailbox.png" alt="mailbox"/>
         </div>
-      </div>
+      </section>
+        <app-mailbox-detail [mailboxDetail]="arduinoInfo"></app-mailbox-detail>
+      <section class="section-button">
+        <ion-button class="stop-button" color="danger" expand="block">Stop Recording</ion-button>
+      </section>
     </ion-slide>
     <ion-slide>
       <ion-list lines="none" class="mailbox-list" *ngIf="selectedSegment === 'Archive'">
