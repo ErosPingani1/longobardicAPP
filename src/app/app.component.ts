@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-
 import { Platform } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
@@ -35,7 +34,7 @@ export class AppComponent {
       this.notificationService.initPush();
       this.checkStorage(3);
       this.notificationService.checkNotificationsOnAppOpeningOrBackToForeground(); // Notifications checked on app opening
-      this.mailboxService.setSessionArduinoInfo();
+      this.mailboxService.setSessionMailboxStatus();
     });
   }
 

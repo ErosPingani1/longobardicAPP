@@ -2,9 +2,9 @@ import { Injectable } from '@angular/core';
 import { Mail } from 'src/app/models/mail';
 import { StorageService } from '../storage/storage.service';
 import { formatDate } from '@angular/common';
-import { ArduinoInfo } from 'src/app/models/arduino-info';
 import { MailboxRepository } from 'src/app/repos/mailbox.repository';
 import { ToastController } from '@ionic/angular';
+import { MailboxStatus } from 'src/app/models/mailbox-status';
 
 @Injectable({
   providedIn: 'root'
@@ -19,7 +19,7 @@ export class MailboxService {
 
   private mailboxCollectionID = '1';
 
-  private sessionArduinoInfo: ArduinoInfo;
+  private sessionMailboxStatus: MailboxStatus;
 
   /**
    * Get the number of available new mails
@@ -43,12 +43,12 @@ export class MailboxService {
   /**
    * Method that sets a sessionArduinoInfo in order to get the data on app opening and store it in session storage
    */
-  public setSessionArduinoInfo(): void {
+  public setSessionMailboxStatus(): void {
     this.mailboxRepository.getDeviceStatus()
       .then(
         async (resp) => {
           if (resp.status === 'ok') {
-            this.sessionArduinoInfo = resp.arduinoInfo;
+            this.sessionMailboxStatus = resp.mailboxStatus;
           } else {
             this.showSetSessionErrorToast();
           }
@@ -60,8 +60,8 @@ export class MailboxService {
       );
   }
 
-  public getSessionArduinoInfo(): ArduinoInfo {
-    return this.sessionArduinoInfo;
+  public getSessionMailboxStatus(): MailboxStatus {
+    return this.sessionMailboxStatus;
   }
 
   /**

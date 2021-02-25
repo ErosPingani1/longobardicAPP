@@ -1,7 +1,7 @@
-import { ArduinoInfo } from './arduino-info';
+import { MailboxStatus } from './mailbox-status';
 
 export class GetStatusResponse {
     status: string;
     message: string;
-    arduinoInfo: ArduinoInfo;
+    mailboxStatus: MailboxStatus;
 }

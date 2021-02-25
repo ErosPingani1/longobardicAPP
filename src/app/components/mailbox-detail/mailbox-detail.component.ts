@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { ArduinoInfo } from 'src/app/models/arduino-info';
+import { MailboxStatus } from 'src/app/models/mailbox-status';
 
 @Component({
   selector: 'app-mailbox-detail',
@@ -8,14 +8,10 @@ import { ArduinoInfo } from 'src/app/models/arduino-info';
 })
 export class MailboxDetailComponent implements OnInit {
 
-  @Input() mailboxDetail: ArduinoInfo;
-
-  protected battery: number;
+  @Input() mailboxStatus: MailboxStatus;
 
   constructor() { }
 
-  ngOnInit() {
-    this.battery = parseInt(this.mailboxDetail.battery);
-  }
+  ngOnInit() { }
 
 }
