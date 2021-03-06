@@ -21,6 +21,7 @@ export class MailboxPage implements OnInit {
   protected availableSegments = ['Mailbox', 'Archive'];
   protected selectedSegment = 'Mailbox';
   protected mailboxStatus: MailboxStatus;
+  protected buttonStatus: string;
   protected buttonVariants = {
     stop: { color: 'danger', text: 'Stop Recording' },
     resume: { color: 'success', text: 'Resume Recording' }
@@ -35,6 +36,7 @@ export class MailboxPage implements OnInit {
 
   ngOnInit() {
     this.mailboxStatus = this.mailboxService.getSessionMailboxStatus();
+    this.buttonStatus = this.mailboxStatus.recording ? 'stop' : 'resume';
   }
 
   ionViewDidEnter() {

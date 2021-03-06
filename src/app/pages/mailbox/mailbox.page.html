@@ -23,7 +23,7 @@
       </div>
       <app-mailbox-detail [mailboxStatus]="mailboxStatus"></app-mailbox-detail>
       <section class="section-button">
-        <ion-button class="recording-button" color="{{ buttonVariants.stop.color }}" expand="block">{{ buttonVariants.stop.text }}</ion-button>
+        <ion-button class="recording-button" color="{{ buttonVariants[buttonStatus].color }}" expand="block">{{ buttonVariants[buttonStatus].text }}</ion-button>
       </section>
     </ion-slide>
     <ion-slide>
