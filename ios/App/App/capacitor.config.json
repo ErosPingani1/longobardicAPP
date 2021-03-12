@@ -1,0 +1,21 @@
+{
+  "appId": "com.erospingani1.longobardicapp",
+  "appName": "longobardicAPP",
+  "bundledWebRuntime": false,
+  "npmClient": "npm",
+  "webDir": "www",
+  "plugins": {
+    "SplashScreen": {
+      "launchShowDuration": 0
+    },
+    "PushNotifications": {
+      "presentationOptions": [
+        "badge",
+        "sound",
+        "alert"
+      ]
+    }
+  },
+  "cordova": {},
+  "linuxAndroidStudioPath": "/home/eros/Scaricati/ScaricatiHD/android-studio-ide-201.6953283-linux/android-studio/bin/studio.sh"
+}
